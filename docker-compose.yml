@@ -12,6 +12,13 @@ services:
       - app_data:/var/www/html
     depends_on:
       - db
+    entrypoint: >
+      /bin/sh -c "
+        curl -L https://github.com/ONLYOFFICE/onlyoffice-nextcloud/releases/latest/download/onlyoffice.tar.gz -o /tmp/onlyoffice.tar.gz &&
+        tar -xzf /tmp/onlyoffice.tar.gz -C /var/www/html/apps/ &&
+        php /var/www/html/occ app:enable onlyoffice ;
+        php-fpm
+      "
 
 app-setup:
   container_name: app-setup
