@@ -1,13 +1,14 @@
 services:
-  app:
-    container_name: app-server
-    image: nextcloud:fpm
+  db:
+    container_name: db-server
+    image: postgres:15
     restart: always
-    expose:
-      - '80'
-      - '9000'
+    environment:
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=nextcloud
+      - POSTGRES_PASSWORD=nextcloud
     volumes:
-      - app_data:/var/www/html
+      - db_data:/var/lib/postgresql/data
   onlyoffice-document-server:
     container_name: onlyoffice-document-server
     image: onlyoffice/documentserver:latest
