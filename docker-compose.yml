@@ -20,22 +20,6 @@ services:
         php-fpm
       "
 
-app-setup:
-  container_name: app-setup
-  image: nextcloud:fpm
-  restart: "no"
-  depends_on:
-    - app
-  volumes:
-    - app_data:/var/www/html
-  entrypoint: >
-    /bin/sh -c "
-      sleep 30 &&
-      curl -L https://github.com/ONLYOFFICE/onlyoffice-nextcloud/releases/latest/download/onlyoffice.tar.gz -o /tmp/onlyoffice.tar.gz &&
-      tar -xzf /tmp/onlyoffice.tar.gz -C /var/www/html/apps/ &&
-      php /var/www/html/occ app:enable onlyoffice
-    "
-
   db:
     container_name: db-server
     image: postgres:15
