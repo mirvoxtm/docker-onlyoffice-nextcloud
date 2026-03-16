@@ -32,6 +32,7 @@ services:
     volumes:
       - app_data:/var/www/html
 volumes:
+  db_data:
   document_data:
   document_log:
   app_data:
